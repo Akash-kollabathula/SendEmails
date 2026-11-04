@@ -1,0 +1,6 @@
+{
+  "name": "SendEmails",
+  "description": "Send bulk job application emails with attached resume and customizable template via Gmail - by Ak@sh",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
