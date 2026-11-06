@@ -80,29 +80,63 @@ export const UnauthorizedDomainModal: React.FC<UnauthorizedDomainModalProps> = (
           {/* Steps */}
           <div className="bg-slate-50 border border-slate-200 rounded-xl p-3.5 space-y-2.5">
             <div className="font-bold text-slate-900 text-xs">
-              Quick 30-Second Fix (One-time setup):
+              Fix 1: Domain Whitelist (One-Time Setup):
             </div>
-            <ol className="space-y-2 list-decimal list-inside text-slate-600 leading-relaxed text-xs">
+            <ol className="space-y-1.5 list-decimal list-inside text-slate-600 leading-relaxed text-xs">
               <li>
-                Click the button below to open your project&apos;s <strong>Firebase Authentication Settings</strong>.
+                Open <strong>Firebase Settings</strong> below.
               </li>
               <li>
-                Scroll down to <strong>Authorized domains</strong> and click <strong>Add domain</strong>.
+                Under <strong>Authorized domains</strong>, click <strong>Add domain</strong>.
               </li>
               <li>
-                Paste <code className="bg-white px-1.5 py-0.5 rounded border border-slate-300 font-mono text-[11px] text-slate-800 font-bold">{currentDomain}</code> and click <strong>Add</strong>.
+                Paste <code className="bg-white px-1.5 py-0.5 rounded border border-slate-300 font-mono text-[11px] text-slate-800 font-bold">{currentDomain}</code> and save.
               </li>
             </ol>
           </div>
 
-          <div className="flex items-center justify-between gap-2 pt-1">
+          <div className="bg-blue-50/70 border border-blue-200 rounded-xl p-3.5 space-y-2">
+            <div className="font-bold text-blue-950 text-xs">
+              Fix 2: Allow All Users (Error 403: access_denied / App in Testing):
+            </div>
+            <p className="text-slate-600 text-xs leading-relaxed">
+              If Google displays &quot;<em>Access blocked: App has not completed verification</em>&quot;, your project is in Testing mode.
+            </p>
+            <div className="flex flex-col gap-1.5 pt-1 text-xs text-blue-900">
+              <a
+                href={`https://console.cloud.google.com/apis/credentials/consent?project=${projectId}`}
+                target="_blank"
+                rel="noreferrer"
+                className="font-bold underline flex items-center gap-1 hover:text-blue-700"
+              >
+                <span>Open Google Cloud OAuth Consent Screen</span>
+                <ExternalLink className="w-3 h-3" />
+              </a>
+              <span className="text-slate-600 text-[11px]">
+                ➔ To allow everyone: Click <strong>Publish App</strong>.<br/>
+                ➔ Or add specific emails: Scroll to <strong>Test users</strong> ➔ <strong>+ ADD USERS</strong>.
+              </span>
+            </div>
+          </div>
+
+          <div className="flex items-center justify-between gap-2 pt-1 flex-wrap">
             <a
               href={consoleSettingsUrl}
               target="_blank"
               rel="noreferrer"
-              className="inline-flex items-center gap-1.5 px-4 py-2.5 text-xs font-bold text-white bg-blue-600 hover:bg-blue-700 rounded-xl shadow-xs transition-colors"
+              className="inline-flex items-center gap-1.5 px-3.5 py-2 text-xs font-bold text-white bg-blue-600 hover:bg-blue-700 rounded-xl shadow-xs transition-colors"
             >
-              <span>Open Firebase Settings</span>
+              <span>Firebase Domains</span>
+              <ExternalLink className="w-3.5 h-3.5" />
+            </a>
+
+            <a
+              href={`https://console.cloud.google.com/apis/credentials/consent?project=${projectId}`}
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex items-center gap-1.5 px-3.5 py-2 text-xs font-bold text-slate-700 bg-slate-100 hover:bg-slate-200 rounded-xl transition-colors"
+            >
+              <span>OAuth Consent Screen</span>
               <ExternalLink className="w-3.5 h-3.5" />
             </a>
 
@@ -112,9 +146,9 @@ export const UnauthorizedDomainModal: React.FC<UnauthorizedDomainModalProps> = (
                 onClose();
                 onRetry();
               }}
-              className="inline-flex items-center gap-1 px-4 py-2.5 text-xs font-semibold text-slate-700 bg-slate-100 hover:bg-slate-200 rounded-xl transition-colors cursor-pointer"
+              className="inline-flex items-center gap-1 px-3.5 py-2 text-xs font-semibold text-white bg-emerald-600 hover:bg-emerald-700 rounded-xl transition-colors cursor-pointer"
             >
-              <span>Retry Sign-In</span>
+              <span>Retry Login</span>
               <ArrowRight className="w-3.5 h-3.5" />
             </button>
           </div>

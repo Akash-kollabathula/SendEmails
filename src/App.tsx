@@ -416,7 +416,15 @@ export default function App() {
             </div>
           </div>
 
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2 sm:gap-3">
+            <button
+              type="button"
+              onClick={() => setShowUnauthorizedDomainModal(true)}
+              className="text-xs text-slate-500 hover:text-slate-800 px-2 py-1.5 rounded-lg hover:bg-slate-100 transition-colors cursor-pointer flex items-center gap-1 font-medium"
+              title="Setup & Permissions Guide for Google Accounts"
+            >
+              <span>OAuth Help</span>
+            </button>
             {user ? (
               <div className="flex items-center gap-2 bg-emerald-50 border border-emerald-200 rounded-xl px-3 py-1.5 text-xs">
                 <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" />
