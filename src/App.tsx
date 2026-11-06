@@ -26,6 +26,7 @@ import {
 } from './services/firebase';
 import { sendGmailMessage, EmailPayload } from './services/gmail';
 import { ResumeData } from './types';
+import { UnauthorizedDomainModal } from './components/UnauthorizedDomainModal';
 
 // Standard high-converting SDET resume email template
 const DEFAULT_SUBJECT = 'Application: SDET / Automation Engineer (Playwright + TypeScript | 3 YOE) - Akash Kollabathula';
@@ -85,7 +86,9 @@ export default function App() {
   const [isSending, setIsSending] = useState(false);
   const [sendProgress, setSendProgress] = useState<{ current: number; total: number } | null>(null);
   const [results, setResults] = useState<ParsedRecipient[]>([]);
+  // Modals
   const [showConfirmModal, setShowConfirmModal] = useState(false);
+  const [showUnauthorizedDomainModal, setShowUnauthorizedDomainModal] = useState(false);
 
   // Load default resume on mount
   useEffect(() => {
@@ -144,7 +147,17 @@ export default function App() {
         setToken(res.accessToken);
       }
     } catch (err: any) {
-      alert(`Google sign in failed: ${err.message || err}`);
+      console.error('Google Sign In error:', err);
+      const errCode = err?.code || '';
+      const errMsg = err?.message || String(err);
+
+      if (errCode === 'auth/unauthorized-domain' || errMsg.includes('unauthorized-domain')) {
+        setShowUnauthorizedDomainModal(true);
+      } else if (errCode === 'auth/popup-closed-by-user') {
+        // User closed popup; do nothing
+      } else {
+        alert(`Google sign in failed: ${errMsg}`);
+      }
     } finally {
       setIsLoggingIn(false);
     }
@@ -782,6 +795,14 @@ export default function App() {
             </div>
           </div>
         </div>
+      )}
+
+      {/* Unauthorized Domain Modal for GitHub Pages */}
+      {showUnauthorizedDomainModal && (
+        <UnauthorizedDomainModal
+          onClose={() => setShowUnauthorizedDomainModal(false)}
+          onRetry={handleSignIn}
+        />
       )}
 
       {/* Footer */}
