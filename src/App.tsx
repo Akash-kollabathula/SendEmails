@@ -47,9 +47,9 @@ I have attached my updated resume for your review. I would love the chance to co
 Thank you for your time and consideration!
 
 Best regards,
-Akash Kollabathula
+{{my_name}}
 SDET | Playwright + TypeScript Automation Engineer
-Email: kollabathula.akash.test@gmail.com | Phone: +91 9676996550 | Location: Hyderabad, India`;
+Email: {{my_email}} | Phone: +91 9676996550 | Location: Hyderabad, India`;
 
 interface ParsedRecipient {
   email: string;
@@ -266,17 +266,31 @@ export default function App() {
     setTimeout(() => setCopiedTag(null), 1200);
   };
 
-  // Render text replacing {{name}}, {{company}}, {{role}}
+  // Render text replacing {{name}}, {{company}}, {{role}}, {{my_name}}, {{my_email}}
   const renderTemplate = (text: string, rec?: ParsedRecipient) => {
     const rName = rec?.name || 'Hiring Team';
     const rCompany = rec?.company || 'Your Company';
     const rRole = rec?.role || 'SDET / QA Automation Engineer';
+    const myName = user?.displayName || 'Akash Kollabathula';
+    const myEmail = user?.email || 'kollabathula.akash.test@gmail.com';
 
     return text
       .replace(/\{\{name\}\}/g, rName)
       .replace(/\{\{recruiter_name\}\}/g, rName)
       .replace(/\{\{company\}\}/g, rCompany)
-      .replace(/\{\{role\}\}/g, rRole);
+      .replace(/\{\{role\}\}/g, rRole)
+      .replace(/\{\{my_name\}\}/g, myName)
+      .replace(/\{\{my_email\}\}/g, myEmail);
+  };
+
+  // Open individual recipient in Gmail Web composer directly
+  const handleOpenInGmail = (rec: ParsedRecipient) => {
+    const renderedSubject = renderTemplate(subject, rec);
+    const renderedBody = renderTemplate(body, rec);
+    const url = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(
+      rec.email
+    )}&su=${encodeURIComponent(renderedSubject)}&body=${encodeURIComponent(renderedBody)}`;
+    window.open(url, '_blank');
   };
 
   // Trigger Send Modal
@@ -302,7 +316,13 @@ export default function App() {
           setToken(res.accessToken);
         }
       } catch (e: any) {
-        alert('Google Sign-In required to send emails via Gmail.');
+        const errCode = e?.code || '';
+        const errMsg = e?.message || String(e);
+        if (errCode === 'auth/unauthorized-domain' || errMsg.includes('unauthorized-domain')) {
+          setShowUnauthorizedDomainModal(true);
+        } else if (errCode !== 'auth/popup-closed-by-user') {
+          alert(`Google Sign-In failed: ${errMsg}`);
+        }
         return;
       }
     }
@@ -667,6 +687,24 @@ export default function App() {
                 : `Send Email with Attached Resume (${parsedRecipients.length} Recipient${parsedRecipients.length !== 1 ? 's' : ''})`}
             </span>
           </button>
+
+          {/* Fallback Gmail Web compose option */}
+          <div className="mt-3 flex items-center justify-between text-xs text-slate-500 pt-2.5 border-t border-slate-100 flex-wrap gap-2">
+            <span>Direct composer (No Google Cloud setup required):</span>
+            <button
+              type="button"
+              onClick={() => {
+                if (parsedRecipients.length > 0) {
+                  handleOpenInGmail(parsedRecipients[0]);
+                }
+              }}
+              disabled={parsedRecipients.length === 0}
+              className="inline-flex items-center gap-1 text-blue-600 hover:text-blue-800 font-semibold cursor-pointer disabled:opacity-50 hover:underline"
+            >
+              <ExternalLink className="w-3.5 h-3.5" />
+              <span>Open in Gmail Web ({parsedRecipients[0]?.email || 'Recipient'})</span>
+            </button>
+          </div>
         </section>
 
         {/* 4. Live Results / Status when sending */}
@@ -695,7 +733,7 @@ export default function App() {
                     <span className="text-slate-500 text-[11px] ml-2">({r.name} • {r.company})</span>
                   </div>
 
-                  <div>
+                  <div className="flex items-center gap-2">
                     {r.status === 'idle' && (
                       <span className="text-slate-400 text-[11px]">Queued</span>
                     )}
@@ -714,6 +752,15 @@ export default function App() {
                         <AlertCircle className="w-3.5 h-3.5" /> Failed
                       </span>
                     )}
+
+                    <button
+                      type="button"
+                      onClick={() => handleOpenInGmail(r)}
+                      title="Open in Gmail Web composer directly"
+                      className="p-1 text-slate-400 hover:text-blue-600 rounded hover:bg-slate-100 transition-colors cursor-pointer"
+                    >
+                      <ExternalLink className="w-3.5 h-3.5" />
+                    </button>
                   </div>
                 </div>
               ))}
