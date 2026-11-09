@@ -19,11 +19,11 @@ export const EMAIL_TEMPLATES: EmailTemplate[] = [
     description: 'High-converting application highlighting 3 YOE, HCL Technologies experience, POM frameworks, and REST API testing.',
     badge: 'Recommended',
     subject: 'Application: SDET / Automation QA Engineer (Playwright + TypeScript | 3 YOE) - Akash Kollabathula',
-    body: `<p>Hi {{recruiter_name}},</p>
+    body: `<p>Hi Hiring Team,</p>
 
 <p>I hope you are having a productive week.</p>
 
-<p>I am writing to express my strong interest in SDET / QA Automation Engineer roles at <strong>{{company}}</strong>. With <strong>3 years of professional experience</strong> designing robust automated testing frameworks for web applications and REST APIs, I am confident I can bring immediate velocity and quality assurance to your engineering teams.</p>
+<p>I am reaching out to explore SDET / QA Automation Engineer opportunities. With <strong>3 years of professional experience</strong> designing robust automated testing frameworks for web applications and REST APIs at HCL Technologies, I am confident I can bring immediate velocity and quality assurance to your engineering teams.</p>
 
 <p>Currently, as a <strong>Software Engineer – QA Automation at HCL Technologies</strong>, my core work revolves around:</p>
 <ul>
@@ -34,7 +34,7 @@ export const EMAIL_TEMPLATES: EmailTemplate[] = [
   <li><strong>AI-Assisted Testing:</strong> Leveraging Playwright MCP Server, Copilot, and agent workflows to accelerate test scenario generation and maintenance by ~40%.</li>
 </ul>
 
-<p>I have attached my updated resume for your review. I would welcome the opportunity to connect and discuss how my hands-on test automation expertise aligns with upcoming opportunities at <strong>{{company}}</strong>.</p>
+<p>I have attached my updated resume for your review. I would welcome the opportunity to connect and discuss how my hands-on test automation expertise can add value to your engineering team.</p>
 
 <p>Thank you for your time and consideration.</p>
 
@@ -48,12 +48,12 @@ SDET | Playwright + TypeScript Automation Engineer<br>
     title: 'Modern QA & AI-Assisted Automation Specialist',
     description: 'Focuses on next-gen testing techniques, Playwright MCP server, agent-driven authoring, and speed.',
     badge: 'Modern & AI',
-    subject: 'Exploring QA Automation / SDET Opportunities at {{company}} - Akash Kollabathula',
-    body: `<p>Dear {{recruiter_name}},</p>
+    subject: 'Exploring QA Automation / SDET Opportunities - Akash Kollabathula',
+    body: `<p>Hi Hiring Team,</p>
 
 <p>I hope this email finds you well.</p>
 
-<p>I follow <strong>{{company}}</strong>'s engineering innovations with great interest and wanted to reach out regarding test automation and SDET openings on your team.</p>
+<p>I am reaching out regarding test automation and SDET openings on your team.</p>
 
 <p>As an SDET with 3 years of hands-on experience in <strong>Playwright, TypeScript, and modern QA architectures</strong>, I focus on building reliable, fast, zero-flakiness test suites that empower engineering teams to release with complete confidence. In my current role at HCL Technologies, I have actively integrated <strong>AI-assisted testing tools</strong> (including Playwright MCP Server, Claude, and GitHub Copilot) to design, heal, and maintain E2E test suites, cutting test authoring time by ~40% while upholding high coverage.</p>
 
@@ -64,7 +64,7 @@ SDET | Playwright + TypeScript Automation Engineer<br>
   <li>Proven track record in reducing test flakiness and execution time through parallel execution workers.</li>
 </ul>
 
-<p>My resume is attached to this email. If there are relevant roles open or coming up at {{company}}, I would love to introduce myself and explore potential alignment.</p>
+<p>My resume is attached to this email. If there are relevant roles open or coming up, I would love to connect and explore potential alignment.</p>
 
 <p>Best regards,<br>
 <strong>{{my_name}}</strong><br>
@@ -75,12 +75,12 @@ SDET | Playwright + TypeScript Automation Engineer<br>
     title: 'Concise Recruiter / Hiring Lead Outreach',
     description: 'Short, clean, and direct inquiry designed for busy technical recruiters and engineering managers.',
     badge: 'Concise',
-    subject: 'Akash Kollabathula - SDET (Playwright + TypeScript | 3 YOE) for {{company}}',
-    body: `<p>Hi {{recruiter_name}},</p>
+    subject: 'Akash Kollabathula - SDET (Playwright + TypeScript | 3 YOE)',
+    body: `<p>Hi Hiring Team,</p>
 
 <p>I hope your week is off to a great start.</p>
 
-<p>I am reaching out to see if <strong>{{company}}</strong> is currently hiring or building a pipeline for <strong>SDET / QA Automation Engineers</strong>.</p>
+<p>I am reaching out to see if you are currently hiring or building a pipeline for <strong>SDET / QA Automation Engineers</strong>.</p>
 
 <p>Briefly about me: I have <strong>3 years of experience</strong> working as a QA Automation Engineer at HCL Technologies, specializing in <strong>Playwright, TypeScript, REST API testing, and CI/CD pipelines (GitHub Actions/Jenkins)</strong>. I specialize in building maintainable test frameworks from scratch and reducing regression turnaround times.</p>
 
@@ -93,16 +93,16 @@ SDET | Playwright + TypeScript Automation Engineer<br>
   {
     id: 'custom-template',
     title: 'Custom Template (Fully Customizable)',
-    description: 'Draft your own custom message using smart tags like {{company}}, {{recruiter_name}}, {{my_name}}, etc.',
+    description: 'Universal template starting with Hi Hiring Team, easily personalized.',
     badge: 'Custom',
     subject: 'Job Opportunity Inquiry - SDET - Akash Kollabathula',
-    body: `<p>Hello {{recruiter_name}},</p>
+    body: `<p>Hi Hiring Team,</p>
 
 <p>I hope you are doing well.</p>
 
-<p>I am reaching out regarding opportunities for an <strong>SDET / Automation Test Engineer</strong> at <strong>{{company}}</strong>. I bring 3 years of hands-on experience in Playwright, TypeScript, and API automation with a proven track record at HCL Technologies.</p>
+<p>I am reaching out regarding opportunities for an <strong>SDET / Automation Test Engineer</strong>. I bring 3 years of hands-on experience in Playwright, TypeScript, and API automation with a proven track record at HCL Technologies.</p>
 
-<p>Please find my updated resume attached to this email. I would appreciate the chance to discuss how I can contribute to {{company}}'s QA and software quality goals.</p>
+<p>Please find my updated resume attached to this email. I would appreciate the chance to discuss how I can contribute to your QA and software quality goals.</p>
 
 <p>Best regards,<br>
 <strong>{{my_name}}</strong><br>

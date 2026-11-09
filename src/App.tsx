@@ -31,18 +31,21 @@ import { UnauthorizedDomainModal } from './components/UnauthorizedDomainModal';
 // Standard high-converting SDET resume email template
 const DEFAULT_SUBJECT = 'Application: SDET / Automation Engineer (Playwright + TypeScript | 3 YOE) - Akash Kollabathula';
 
-const DEFAULT_BODY = `Hi {{name}},
+const DEFAULT_BODY = `Hi Hiring Team,
 
-I am reaching out to explore SDET / QA Automation Engineer opportunities at {{company}}.
+I hope you are doing well.
+
+I am reaching out to explore SDET / QA Automation Engineer opportunities.
 
 With 3 years of professional experience as a QA Automation Software Engineer at HCL Technologies, my core strengths include:
 • Playwright & TypeScript Frameworks: Designed and scaled Page Object Model (POM) frameworks with custom fixtures, auto-waiting, and parallel workers, achieving 60%+ automation coverage.
-• Flaky Test Reduction: Decreased test suite flakiness from 25% to under 15% using reliable locators and web-first assertions.
+• Flaky Test Reduction: Decreased test suite flakiness from 25% down to below 15% using reliable locators, auto-waiting, and web-first assertions.
 • REST API Automation: Automated 50+ REST API test cases using Playwright APIRequestContext and Postman, validating JSON schemas and API contracts.
+• SQL & Backend Validation: Performed SQL backend validations to cross-verify UI data against database records, uncovering data synchronization defects.
 • CI/CD Pipelines: Integrated test suites with GitHub Actions and Jenkins for automated regression and Allure reporting.
-• AI-Assisted Testing: Applied Playwright MCP Server, Copilot, and agents to speed up test design and maintenance by ~40%.
+• AI-Assisted Testing: Applied Playwright MCP Server, Copilot, and agents to speed up test design, scenario discovery, and maintenance by ~40%.
 
-I have attached my updated resume for your review. I would love the chance to connect and discuss how my hands-on QA expertise can add value to {{company}}.
+I have attached my updated resume for your review. I would welcome the opportunity to discuss how my hands-on QA expertise can add value to your team.
 
 Thank you for your time and consideration!
 
@@ -94,7 +97,7 @@ export default function App() {
   useEffect(() => {
     async function loadResume() {
       try {
-        const resumeUrl = './assets/aistudio/Akash_3_YOE_Playwright_524d041b.pdf';
+        const resumeUrl = './assets/aistudio/Akash-3YOE-2Paged-Resume_aba1e189.pdf';
         const res = await fetch(resumeUrl);
         if (res.ok) {
           const blob = await res.blob();
@@ -107,8 +110,8 @@ export default function App() {
           const base64Data = btoa(binary);
 
           setResume({
-            fileName: 'Akash_Kollabathula_SDET_Playwright_3YOE.pdf',
-            displayName: 'Akash Kollabathula - SDET Resume',
+            fileName: 'Akash_Kollabathula_SDET_3YOE_Resume.pdf',
+            displayName: 'Akash Kollabathula - SDET 2-Page Resume (3 YOE)',
             fileSize: blob.size,
             mimeType: 'application/pdf',
             base64Data,
@@ -151,7 +154,13 @@ export default function App() {
       const errCode = err?.code || '';
       const errMsg = err?.message || String(err);
 
-      if (errCode === 'auth/unauthorized-domain' || errMsg.includes('unauthorized-domain')) {
+      if (
+        errCode === 'auth/unauthorized-domain' ||
+        errMsg.includes('unauthorized-domain') ||
+        errMsg.includes('access_denied') ||
+        errMsg.includes('verification process') ||
+        errCode === 'auth/access-denied'
+      ) {
         setShowUnauthorizedDomainModal(true);
       } else if (errCode === 'auth/popup-closed-by-user') {
         // User closed popup; do nothing
@@ -318,7 +327,13 @@ export default function App() {
       } catch (e: any) {
         const errCode = e?.code || '';
         const errMsg = e?.message || String(e);
-        if (errCode === 'auth/unauthorized-domain' || errMsg.includes('unauthorized-domain')) {
+        if (
+          errCode === 'auth/unauthorized-domain' ||
+          errMsg.includes('unauthorized-domain') ||
+          errMsg.includes('access_denied') ||
+          errMsg.includes('verification process') ||
+          errCode === 'auth/access-denied'
+        ) {
           setShowUnauthorizedDomainModal(true);
         } else if (errCode !== 'auth/popup-closed-by-user') {
           alert(`Google Sign-In failed: ${errMsg}`);
@@ -485,7 +500,7 @@ export default function App() {
                   {resume ? resume.fileName : 'Loading resume...'}
                 </div>
                 <div className="text-[11px] text-slate-500">
-                  {resume ? `${(resume.fileSize / 1024).toFixed(1)} KB` : '124 KB'} • Playwright + TypeScript SDET (3 YOE)
+                  {resume ? `${(resume.fileSize / 1024).toFixed(1)} KB` : '182 KB'} • 2-Page SDET Resume (Playwright + TypeScript | 3 YOE)
                 </div>
               </div>
             </div>
